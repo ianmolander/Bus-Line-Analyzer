@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import se.iamo.buslineanalyzer.model.JourneyPatternOnLineResponseData;
 import se.iamo.buslineanalyzer.model.JourneyPatternPointOnLine;
 import se.iamo.buslineanalyzer.model.StopPoint;
 
@@ -30,9 +31,9 @@ public class TrafiklabCaller {
     }
 
     public List<JourneyPatternPointOnLine> getAllJourneyPatternsOnLines() {
-
-        return Collections.emptyList();
-
+        UriComponentsBuilder builder = createUriBuilder("jour");
+        JourneyPatternOnLineResponseData jourPatterns = restTemplate.getForObject(builder.toUriString(), JourneyPatternOnLineResponseData.class);
+        return jourPatterns != null ? jourPatterns.getResponseData().getResult() : Collections.emptyList();
     }
 
     private UriComponentsBuilder createUriBuilder(String model) {
