@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class TrafiklabCaller {
+public final class TrafiklabCaller {
 
     @Value("${api.url}")
     private String apiUrl;

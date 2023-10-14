@@ -1,4 +1,4 @@
-package se.iamo.buslineanalyzer;
+package se.iamo.buslineanalyzer.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
