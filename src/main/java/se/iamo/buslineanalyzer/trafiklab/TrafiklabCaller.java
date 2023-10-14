@@ -7,6 +7,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import se.iamo.buslineanalyzer.model.JourneyPatternOnLineResponseData;
 import se.iamo.buslineanalyzer.model.JourneyPatternPointOnLine;
 import se.iamo.buslineanalyzer.model.StopPoint;
+import se.iamo.buslineanalyzer.model.StopPointResponseData;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,7 +28,9 @@ public class TrafiklabCaller {
     }
 
     public List<StopPoint> getAllStopPoints() {
-        return Collections.emptyList();
+        UriComponentsBuilder builder = createUriBuilder("stop");
+        StopPointResponseData stopData = restTemplate.getForObject(builder.toUriString(), StopPointResponseData.class);
+        return stopData != null ? stopData.getResponseData().getResult() : Collections.emptyList();
     }
 
     public List<JourneyPatternPointOnLine> getAllJourneyPatternsOnLines() {
