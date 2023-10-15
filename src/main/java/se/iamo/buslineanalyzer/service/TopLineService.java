@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import se.iamo.buslineanalyzer.exception.DataNotFoundException;
 import se.iamo.buslineanalyzer.model.JourneyPatternPointOnLine;
 import se.iamo.buslineanalyzer.model.StopPoint;
-import se.iamo.buslineanalyzer.trafiklab.TrafiklabCaller;
+import se.iamo.buslineanalyzer.integration.TrafiklabCaller;
 
 import java.util.HashMap;
 import java.util.List;

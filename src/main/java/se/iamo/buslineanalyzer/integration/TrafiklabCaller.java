@@ -1,4 +1,4 @@
-package se.iamo.buslineanalyzer.trafiklab;
+package se.iamo.buslineanalyzer.integration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
