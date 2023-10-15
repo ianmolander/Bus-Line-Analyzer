@@ -22,7 +22,7 @@ public final class TopLineService {
     private final TrafiklabCaller caller;
 
     @Autowired
-    private TopLineService(TrafiklabCaller caller) {
+    TopLineService(TrafiklabCaller caller) {
         this.caller = caller;
     }
 
@@ -69,7 +69,7 @@ public final class TopLineService {
         return sortedLines;
     }
 
-    private List<StopPoint> getStopPointsForBusLine(String busLine, List<JourneyPatternPointOnLine> allJourneyPatterns, List<StopPoint> allStopPoints) {
+    public List<StopPoint> getStopPointsForBusLine(String busLine, List<JourneyPatternPointOnLine> allJourneyPatterns, List<StopPoint> allStopPoints) {
         return allJourneyPatterns.stream()
                 .filter(journeyPattern -> busLine.equals(journeyPattern.getLineNumber()) && journeyPattern.getDirectionCode().equals(DIRECTION_NUMBER))
                 .map(JourneyPatternPointOnLine::getJourneyPatternPointNumber)
