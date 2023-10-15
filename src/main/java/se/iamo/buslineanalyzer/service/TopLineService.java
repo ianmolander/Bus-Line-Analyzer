@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import se.iamo.buslineanalyzer.exception.DataNotFoundException;
 import se.iamo.buslineanalyzer.model.JourneyPatternPointOnLine;
 import se.iamo.buslineanalyzer.model.StopPoint;
 import se.iamo.buslineanalyzer.trafiklab.TrafiklabCaller;
@@ -30,9 +31,14 @@ public final class TopLineService {
     private void findBusLinesWithMostStops() {
         List<StopPoint> allStopPoints = caller.getAllStopPoints();
         List<JourneyPatternPointOnLine> allJourneyPatternsOnLines = caller.getAllJourneyPatternsOnLines();
-        Map<String, Integer> lineStopCounts = getBusLinesWithCountedStopPoints(allJourneyPatternsOnLines);
-        List<Map.Entry<String, Integer>> sortedLines = printStopPointsForTopBusLine(lineStopCounts, allJourneyPatternsOnLines, allStopPoints);
-        logTop10BusLines(sortedLines);
+        if (allStopPoints.isEmpty() || allJourneyPatternsOnLines.isEmpty()) {
+            log.error("No stop points or journey patterns data found");
+            throw new DataNotFoundException("No stop points or journey patterns data found");
+        } else {
+            Map<String, Integer> lineStopCounts = getBusLinesWithCountedStopPoints(allJourneyPatternsOnLines);
+            List<Map.Entry<String, Integer>> sortedLines = printStopPointsForTopBusLine(lineStopCounts, allJourneyPatternsOnLines, allStopPoints);
+            logTop10BusLines(sortedLines);
+        }
     }
 
     private Map<String, Integer> getBusLinesWithCountedStopPoints(List<JourneyPatternPointOnLine> journeyPatternPointOnLines) {
