@@ -44,10 +44,10 @@ public final class TopLineService {
     private Map<String, Integer> getBusLinesWithCountedStopPoints(List<JourneyPatternPointOnLine> journeyPatternPointOnLines) {
         Map<String, Integer> lineStopCounts = new HashMap<>();
 
-        for (JourneyPatternPointOnLine journeyPattern : journeyPatternPointOnLines) {
+        journeyPatternPointOnLines.forEach(journeyPattern -> {
             String lineNumber = journeyPattern.getLineNumber();
             lineStopCounts.put(lineNumber, lineStopCounts.getOrDefault(lineNumber, 0) + 1);
-        }
+        });
 
         return lineStopCounts;
     }
